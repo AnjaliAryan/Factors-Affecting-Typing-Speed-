@@ -1,0 +1,1260 @@
+\documentclass[12pt,a4paper]{report}
+
+%adjust your page margins here
+\usepackage[top=0.70in, bottom=0.70in, left=0.8in,right=0.80in]{geometry} % setting the page alignment with this package
+\usepackage[pdftex]{graphicx} %for embedding images
+\usepackage[%dvips, % commented for pdflatex
+bookmarks,  colorlinks=false]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
+\usepackage{float} %used for figure placement with H as a parameter
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,    % Colours links instead of ugly boxes
+  urlcolor     = blue,    % Colour for external hyperlinks
+  linkcolor    = blue,    % Colour of internal links
+  citecolor    = red      % Colour of citations
+}
+\usepackage{pslatex} % for times new roman, old package, but works
+\usepackage{array} % for making text bold in table
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\usepackage[font=small,labelfont=bf]{caption}
+\def\figurename{\textbf{Figure }}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+ 
+\lstset{ %
+  language=Java,                % the language of the code
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % each line is numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  morekeywords={*,...}               % if you want to add more keywords to the set
+}
+
+%For the header and footer
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%
+\fancyfoot[L]{\emph{MA4240 - Applied Statistics}} % except the center
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+}
+
+\pagestyle{fancy}
+
+\rhead{\emph{Factors Affecting Typing Speed}}
+
+\fancyfoot[LO,LE]{\emph{MA4240 - Applied Statistics}}
+\cfoot{}
+\fancyfoot[RO, RE]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%For the header and footer Over
+
+%Page Border
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\pgfpagesdeclarelayout{boxed}
+{
+  \edef\pgfpageoptionborder{0pt}
+}
+{
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=1,%
+  }
+  \pgfpageslogicalpageoptions{1}
+  {
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.95\pgfphysicalwidth,%
+    resized height=.95\pgfphysicalheight,%
+    center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight}%
+  }%
+}
+\pgfpagesuselayout{boxed}
+\setlength{\parindent}{1cm}
+%GLOBAL SETTINGS OVER, DOCUMENT BEGINS
+\begin{document}
+\renewcommand\bibname{References}
+\lhead{ }
+
+%FROM HERE YOUR PAGES START GETTING ADDED
+
+% includes the cover page
+% \input{project/cover.tex}
+% \newpage
+
+\input{project/title.tex}
+\newpage
+
+% % includes the acknowledgements page
+% \input{project/acknowledgements.tex} 
+% \newpage
+
+\input{project/abstract.tex} % adds the Research Methodology page
+\newpage
+
+%TABLE OF CONTENTS AND LIST OF FIGURES ARE AUTOMATICALLY ADDED BY FOLLOWING COMMANDS
+%ADD FIGURE OF TABLES IF YOU NEED TO, CHECK DOCUMENTATION
+\pagenumbering{roman} %numbering before main content starts
+
+
+%To reset the Header & Footer for TOC and LOF
+% \pagestyle{empty}
+% \addtocontents{toc}{\protect\thispagestyle{empty}}
+% \tableofcontents % adds Index Page
+
+% \addtocontents{lof}{\protect\thispagestyle{empty}}
+% \cleardoublepage
+
+%And reset back the settings we choose for Header and Footer
+\pagestyle{fancy}
+
+\newpage
+\pagenumbering{arabic} %reset numbering to normal for the main content
+
+\section*{\Huge{Introduction}}
+
+The objective of our study is to ascertain factors affecting the typing speed of students. For logistical reasons, we are studying the population of only IIT Hyderabad.The factors that we considered for the purpose of this study are as follows:
+
+\begin{itemize}
+    \item \textbf{Category 1:} Gender
+    \item \textbf{Category 2:} Batch \footnote{We refer to the factor of the current program the student is enrolled into as its batch}
+    \item \textbf{Category 3:} Branch
+\end{itemize}
+    
+    
+
+Through this report we strive to correlate these factors to the typing speed of the individuals. The two dependent variables we study to analyze  the typing speed of an individual are
+
+\begin{itemize}
+    \item WPM (Words per Minute)
+    \item Accuracy during test (in percentage)
+\end{itemize}
+     
+
+We perform an observational study to find how the above stated factors affect the typing speed of an individual in case they have any effect. We then summarise the the generated sample and analyze the sample statistics to estimate population parameters. 
+
+
+\newpage
+\section*{\Huge{Data Collection}}
+
+\subsection*{\LARGE{Variables of Interest}}
+
+The independent variables are :
+\begin{enumerate}
+    \item \textbf{Gender: } Nominal Categorical variable
+    \item \textbf{Branch: } Nominal Categorical variable
+    \item \textbf{Batch: } Ordinal Categorical variable
+\end{enumerate}
+
+\noindent For the purpose of analysis we will group branches into:
+\begin{enumerate}
+    \item \textbf{Group 1}: Coding related engineering branches(CSE, MA, AI, ES) 
+    \item \textbf{Group 2}: Bio-chemistry related engineering branches(CH, CE, MSME, BME, BTE)
+    \item \textbf{Group 3}: Physics related engineering branches(Physics, ME, EE, EP)
+    \item \textbf{Group 4}: Non-engineering branches(LA, Design, Others)
+\end{enumerate}
+
+\noindent The dependant variables are :
+
+\begin{enumerate}
+    \item \textbf{WPM: } Numerical Variable
+    \item \textbf{Accuracy: } Numerical Variable
+\end{enumerate}
+
+\subsection*{\LARGE{Survey}}
+
+A google form was circulated to collect data. To avoid measurement problem in responses, participants were urged to take a common typing test.\footnote{We made use of the website \href{https://monkeytype.com/}{monkeytype}}
+
+The data frame generated had 157 entries with the following statistics:
+
+\vspace{2mm}
+
+
+\begin{center}
+  \textbf{Total distribution:}\\
+  \vspace{0.5cm}
+\begin{tabular}{ |c|c|c|c|c|c|c|c|c|}
+  \hline
+  Male & Female & UG & PG & PHD & Group 1 & Group 2 & Group 3 & Group 4 \\
+  \hline
+  107 & 50 & 80 & 41 & 36 & 53 & 36 & 36 & 32 \\ 
+  \hline
+\end{tabular}
+\end{center}
+\vspace{2mm}
+
+\noindent The survey we conducted is an example of convenience sampling hence the data frame generated would be biased. Any analysis of a biased sample will only represent the sample itself and not the entire population 
+
+\newpage
+\subsection*{\LARGE{Sampling}}
+
+To combat the inherent bias involved in convenience sampling, we use probabilistic sampling along with convenience sampling.
+
+We stratify the data on the basis of value of one independent variable at a time and randomly sample fixed number of points from each group. We then analyze them to draw conclusions.
+
+To determine the minimum number of samples needed to be drawn from each group, first the distribution of sample needs to be ascertained.
+
+\subsubsection*{\Large{Sample Distribution}}
+\textbf{\large{Histogram test}}
+
+The histograms generated in python  for the wpm and accuracy are as follows:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{project/wpm_histo.png}
+    \includegraphics[scale = 0.5]{Accu_histo.png}
+    \caption{Histograms for WPM and Accuracy}
+\end{figure}
+
+The graph shows that the data for wpm is right skewed and the accuracy is left skewed. Hence it is likely that our sample is not normal.\\
+\textbf{\large{Q-Q plot test}}\\
+The Q-Q plots in python  for the accuracy and wpm  are as follows:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.3]{project/qq_wpm.png}
+    \includegraphics[scale = 0.3]{qq_accu.png}
+    \caption{QQ plot for WPM and accuracy}
+\end{figure}
+
+Some of the plotted points fall far from straight line. It gives the impression that the sample is not normally distributed.\\
+\textbf{\large{p-value test for normality}}\\
+The p value test(\hyperref[sec:Hypothesis Testing]{more details}) also concludes that our data is not normal.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Null Hypothesis.jpeg}
+    \caption{p-test for normality}
+\end{figure}
+
+\subsubsection*{\Large{Using Central Limit Theorem}}
+
+The CLT states that in case of skewed data set, if the random sample size$(n)$ is $> 30$, the sample distribution follows normal distribution.
+
+\textbf{Note:-} The histogram and qq plot show that the distribution is not very heavily skewed hence CLT will hold for $n>30$.
+
+The following graphs show the mean for all possible random samples of size 30 from each group verifying the claim that CLT will hold.
+
+% \newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Batch_SDistribution.png}
+    \includegraphics[scale = 0.6]{Batch_SDistribution-Acc.png}
+    \caption{Distribution of sample mean divided by batch }
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Gender_SDistribution.png}
+    \includegraphics[scale = 0.6]{Gender_SDistribution-Acc.png}
+    \caption{Distribution of sample mean divided by gender }
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{Group_SDistribution.png}
+    \includegraphics[scale = 0.5]{Group_SDistribution-Acc.png}
+    \caption{Distribution of sample mean divided by branch }
+\end{figure}
+
+\newpage
+Hence the samples selected for each category are as follows:-
+
+\begin{center}
+  \textbf{Sample:}\\
+  \vspace{0.5cm}
+\begin{tabular}{ |c|c|c|c|c|c|c|c|c|}
+  \hline
+  Male & Female & UG & PG & PHD & Group 1 & Group 2 & Group 3 & Group 4 \\
+  \hline
+  107 & 50 & 80 & 41 & 36 & 53 & 36 & 36 & 32 \\ 
+  \hline
+  70 & 39 & 60 & 35 & 33 & 45 & 30 & 30 & 30 \\ 
+  \hline
+\end{tabular}
+\end{center}
+\vspace{2mm}
+\newpage
+
+\section*{\Huge{Summarizing and Visualizing Sample Data}}
+The collected data has been summarized and visualized under \textbf{3} categories for which the values of mean and variances are calculated and graphs are made to help in visualise the data.\\
+%As per the responses received through G-forms and further sampling randomly gives us the following \emph{statistics}:\\
+\emph{(NOTE: Since the data is being sampled randomly, below mentioned data is for one randomly generated sample.)}
+
+\subsection*{Gender-based Comparison}
+The data was divided into 2 strata, one representing the 'Males' and other for 'Females'. Consider the following statistics:
+
+\vspace{2mm}
+\begin{center}
+Sample size:
+\begin{tabular}{ | m{4em} | m{1cm}| m{1cm} | }
+  \hline
+  Male & 70 \\ 
+  \hline
+  Female & 39 \\
+  \hline
+\end{tabular}
+\end{center}
+\vspace{1.5mm}
+
+\begin{center}
+Mean:
+\begin{tabular}{ |c|c|c|}
+  \hline
+   & WPM & Accuracy \\
+  \hline
+  Male & 61.98 & 94.86 \\ 
+  \hline
+  Female &  49.17 & 94.86 \\
+  \hline
+\end{tabular}
+\end{center}
+\vspace{1.5mm}
+
+\begin{center}
+Variance:
+\begin{tabular}{ |c|c|c|}
+  \hline
+   & WPM & Accuracy \\
+  \hline
+  Male & 539.23 & 43.90 \\ 
+  \hline
+  Female & 180.20 & 43.90 \\
+  \hline
+\end{tabular}
+\end{center}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Gender_BoxPlot-WPM.png}
+    \includegraphics[scale = 0.7]{Gender_BoxPlot-Acc.png}
+    \caption{Side-by-Side Box plots for Gender-based Evaluation}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Gender_Bargraph-WPM.png}
+    \includegraphics[scale = 0.6]{Gender_Bargraph-Acc.png}
+    \caption{Side-by-Side Bar graph plots for Gender-based Evaluation}
+\end{figure}
+\newpage
+\subsection*{Batch-based Comparison}
+The data had been divided into 3 strata; one strata represents 'UG Students', second represents 'PhD Students' and third 'Masters Students'. Consider the following \emph{statistics}:
+
+\vspace{2mm}
+\begin{center}
+Sample size:
+\begin{tabular}{ | m{4em} | m{1cm}| m{1cm} | }
+  \hline
+  UG & 60 \\ 
+  \hline
+  PHD & 33 \\
+  \hline
+  Masters & 35 \\
+  \hline
+\end{tabular}
+\end{center}
+%\vspace{1.5mm}
+
+\begin{center}
+Mean:
+\begin{tabular}{ |c|c|c|}
+  \hline
+   & WPM & Accuracy \\
+  \hline
+  UG & 56.31 & 94.88 \\ 
+  \hline
+  PHD &  54.12 & 95.93 \\
+  \hline
+  Masters & 54.17 & 95.28 \\
+  \hline
+\end{tabular}
+\end{center}
+%\vspace{1.5mm}
+
+\begin{center}
+Variance:
+\begin{tabular}{ |c|c|c|}
+  \hline
+   & WPM & Accuracy \\
+  \hline
+  UG & 525.16 & 37.39 \\ 
+  \hline
+  PHD &  187.67 & 8.87 \\
+  \hline
+  Masters & 242.29 & 11.85 \\
+  \hline
+\end{tabular}
+\end{center}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Batch_BoxPlot-WPM.png}
+    \includegraphics[scale=0.7]{Batch_BoxPlot-Acc.png}
+    \caption{Side-by-Side Box plots for Batch-based Evaluation}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Batch_Bargraph-WPM.png}
+    \includegraphics[scale = 0.6]{Batch_Bargraph-Acc.png}
+    \caption{Side-by-Side Bar graph plots for Batch-based Evaluation}
+\end{figure}
+
+\newpage
+\subsection*{Branch-based Comparison}
+The data had been divided into 4 startas; each one representing a group of branches, following are the groups:
+\begin{center}
+    \hspace{-8mm}\emph{Group 1:} CSE, MA, AI, ES \\
+    \hspace{14mm}\emph{Group 2:} CH, CE, MSME, BME, BTE \\
+    \emph{Group 3:} Physics\footnote{For PhD students, pursuing for degree under department of Physics}, ME, EE, EP \\
+    \hspace{-7mm}\emph{Group 4:} LA\footnote{Liberal Arts}, Des\footnote{Master/Doctorate in Design}, Others \\
+\end{center}
+Consider the following \emph{statistics}:
+
+\begin{center}
+Sample size:
+\begin{tabular}{ | m{4em} | m{1cm}| m{1cm} | }
+    \hline
+    Group 1 & 45 \\ 
+    \hline
+    Group 2 & 30 \\
+    \hline
+    Group 3 & 30 \\
+    \hline
+    Group 4 & 30 \\
+    \hline
+\end{tabular}
+\end{center}
+\vspace{1.5mm}
+
+\begin{center}
+Mean:
+\begin{tabular}{ |c|c|c|}
+  \hline
+   & WPM & Accuracy \\
+  \hline
+  Group 1 & 66.29 & 95.22 \\ 
+  \hline
+  Group 2 & 45.33 & 96.16 \\
+  \hline
+  Group 3 & 54.37 & 93.47 \\
+  \hline
+  Group 4 & 53.57 & 95.93 \\
+  \hline
+\end{tabular}
+\end{center}
+\vspace{1.5mm}
+
+\begin{center}
+Variance:
+\begin{tabular}{ |c|c|c|}
+  \hline
+   & WPM & Accuracy \\
+  \hline
+  Group 1 & 650.66 & 11.90 \\ 
+  \hline
+  Group 2 & 120.64 & 17.66 \\
+  \hline
+  Group 3 & 262.52 & 53.91 \\
+  \hline
+  Group 4 & 123.43 & 5.24 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.7]{Group_BoxPlot-WPM.png}
+    \includegraphics[scale=0.7]{Group_BoxPlot-Acc.png}
+    \caption{Side-by-Side Box plots for Group-based Evaluation}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{Group_Bargraph-WPM.png}
+    \includegraphics[scale = 0.6]{Group_Bargraph-Acc.png}
+    \caption{Side-by-Side Bar graph plots for Group-based Evaluation}
+\end{figure}
+
+\newpage
+\section*{\Huge{Analyzing the Data}}
+\subsection*{\LARGE{Confidence Interval Estimation}}
+With the data of the sample, the quantities like population mean and variance can be estimated using the concept of \emph{Confidence Interval}.
+
+\begin{enumerate}[label=\textbf{\arabic*})]
+    \item \textbf{\Large{CI for estimating population mean}}
+    
+    If $X_1, X_2,..., X_n$ are normally distributed with unknown mean $\mu$ and variance $\sigma^2$, then a $(1 - \alpha)100\%$ CI for the population mean $\mu$ is:
+    \[ \left(\bar{X} - t_{\alpha/2,n-1}\left(\frac{S}{\sqrt{n}}\right),\ \bar{X} + t_{\alpha/2,n-1}\left(\frac{S}{\sqrt{n}}\right)\right)
+    \]
+    \vspace{1mm}
+    
+    \begin{enumerate}
+        \item \textbf{Gender-based Estimation of mean:}
+        Here we have two values of category i.e. Male and Female, so we can say with $95\%$ confidence that population mean of both will lie within specified range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Male & [56.45, 67.52] \ & \ [94.87, 96.56] \\ 
+      \hline
+      Female & [44.83, 53.53] \ & \ [92.72, 97.02] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        
+        \item \textbf{Batch-based Estimation of mean:}
+        Here we have three values of category i.e. UG, PHD and Masters, so we can say with $95\%$ confidence that population mean of all variable will lie within specified range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      UG & [50.40, 62.23] \ & \ [93.30, 96.46] \\ 
+      \hline
+      PHD & [49.26, 58.97] \ & \ [94.88, 96.99] \\
+      \hline
+      Masters & [48.82, 59.52] \ & \ [94.10, 96.46] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    
+        \item \textbf{Branch-based Estimation of mean:}
+        Here we have four values of category i.e. Group 1, Group 2, Group 3, and Group 4, so we can say with $95\%$ confidence that population mean of all variable will lie within specified range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Group 1 & [58.63, 73.95] \ & \ [94.19, 96.26] \\ 
+      \hline
+      Group 2 & [41.23, 49.43] \ & \ [94.60, 97.74] \\
+      \hline
+      Group 3 & [48.32, 60.42] \ & \ [90.72, 96.21] \\
+      \hline
+      Group 4 & [49.42, 57.72] \ & \ [95.08, 96.79] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{1.5mm}
+    \end{enumerate}
+\newpage
+
+    \item \textbf{\Large{CI for estimating difference of population means}}
+    \begin{itemize}
+        \item \textbf{Two sampled pooled t-interval $\left(\dfrac{1}{4}<\dfrac{S_X^2}{S_Y^2}<4\right)$}\\
+        If $X_1,X_2,...,X_n \sim N(\mu_1,\sigma^2)$ and $Y_1,Y_2,...,Y_m \sim N(\mu_2,\sigma^2)$ are independent random samples, then a $(1 - \alpha)100\%$ CI for the difference in the population means, $\mu_1-\mu_2$ is:
+        \[\left((\bar{X}-\bar{Y})-t_{\alpha/2,n+m-2} S_P\sqrt{\frac{1}{n}+\frac{1}{m}},\  (\bar{X}-\bar{Y})+t_{\alpha/2,n+m-2} S_P\sqrt{\frac{1}{n}+\frac{1}{m}}\right)
+        \]
+        where 
+        \[S_P^2 = \dfrac{(n-1)S_X^2+(m-1)S_Y^2}{n+m-2}
+        \]
+        \item \textbf{Welch's t-interval $\left(\dfrac{S_X^2}{S_Y^2}<\dfrac{1}{4} \text{\ or\ } 4<\dfrac{S_X^2}{S_Y^2}\right)$}\\
+        If $X_1,X_2,...,X_n \sim N(\mu_1,\sigma_X^2)$ and $Y_1,Y_2,...,Y_m \sim N(\mu_2,\sigma_Y^2)$ are independent random samples, then a $(1 - \alpha)100\%$ CI for the difference in the population means, $\mu_1-\mu_2$ is:
+        \[\left((\bar{X}-\bar{Y})-t_{\alpha/2,r}\sqrt{\frac{S_X^2}{n}+\frac{S_Y^2}{m}}, \ (\bar{X}-\bar{Y})+t_{\alpha/2,r}\sqrt{\frac{S_X^2}{n}+\frac{S_Y^2}{m}}\right)
+        \]
+        where 
+        \[r = \text{integer part of \ } \dfrac{\left(\frac{S_X^2}{n}+\frac{S_Y^2}{m}\right)^2}{\frac{(S_X^2/n)^2}{n-1} + \frac{(S_Y^2/m)^2}{m-1}}
+        \]
+    \end{itemize}
+    \vspace{1mm}
+    \begin{enumerate}
+        \item \textbf{Estimation difference: Gender-based}
+        With $95\%$ confidence we can say that difference of mean in male and female will lie within:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+        & WPM & Accuracy \\
+      \hline
+      Male-Female & [5.85, 19.77] \ & \ [-1.44, 3.14] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{1.5mm}
+    
+        \item \textbf{Estimation difference: Batch-based}
+    With $95\%$ confidence we can say that difference of mean in all possible batches will lie within range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      UG-PHD & [-6.48, 10.87] \ & \ [-0.82, 2.93] \\ 
+      \hline
+      PHD-Masters & [-7.06, 7.16] \ & \ [-0.90, 2.12] \\
+      \hline
+      UG-Masters & [-8.62, 8.72] \ & \ [-1.58, 2.89] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    
+        \item \textbf{Estimation difference: Branch-based}
+    With $95\%$ confidence we can say that difference of mean in all possible batches will lie within range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Group 1-2 & [12.39, 29.54] \ & \ [-0.83, 2.71] \\ 
+      \hline
+      Group 1-3 & [1.46, 22.39]	\ & \ [-0.76, 4.27] \\
+      \hline
+      Group 1-4 & [4.11, 21.33] \ & \ [-0.72, 2.14]	\\
+      \hline
+      Group 2-3 & [1.88, 16.19] \ & \ [-0.39, 5.79]	\\
+      \hline
+      Group 2-4 & [2.52, 13.94] \ & \ [-1.52, 1.98]	\\
+      \hline
+      Group 3-4 & [-6.38, 7.98]	 \ & \ [-6.38, 7.98] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{1.5mm}
+    \end{enumerate}
+    
+    
+    \item \textbf{\Large{CI for estimating population variance}}
+    
+    If $X_1, X_2,..., X_n$ are normally distributed and $a = \chi^2_{1-\alpha/2,n-1}$, $b = \chi^2_{\alpha/2,n-1}$, then a $(1 - \alpha)100\%$ CI for the population variance $\sigma^2$ is:
+    \[ \left(\dfrac{(n-1)S^2}{b}, \dfrac{(n-1)S^2}{a}\right)
+    \]
+    \begin{enumerate}
+        \item \textbf{Gender-based Estimation of variance:}
+        Here we have two values of category i.e. Male and Female, so we can say with $95\%$ confidence that population variance of both will lie within specified range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Male & [653.82, 1626.51] \ & \ [14.82, 36.85] \\ 
+      \hline
+      Female & [120.34, 299.29] \ & \ [29.27, 72.93] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        
+        \item \textbf{Batch-based Estimation of variance:}
+        Here we have three values of category i.e. UG, PHD and Masters, so we can say with $95\%$ confidence that population variance of all variable will lie within specified range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      UG & [377.33, 781.23] \ & \ [26.87, 55.63] \\ 
+      \hline
+      PHD & [121.37, 328.33] \ & \ [5.73, 15.52] \\
+      \hline
+      Masters & [158.66, 416.28] \ & \ [7.75, 20.35] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    
+        \item \textbf{Branch-based Estimation of variance:}
+        Here we have four values of category i.e. Group 1, Group 2, Group 3, and Group 4, so we can say with $95\%$ confidence that population variance of all variable will lie within specified range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Group 1 & [445.93,1038.25] \ & \ [8.16, 18.99] \\ 
+      \hline
+      Group 2 & [76.52, 218.03] \ & \ [11.20, 31.92] \\
+      \hline
+      Group 3 & [166.50, 474.41] \ & \ [34.19, 97.43] \\
+      \hline
+      Group 4 & [78.28, 223.05]	 \ & \ [3.32, 9.46] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{1.5mm}
+    \end{enumerate}
+
+
+    \item \textbf{\Large{CI for estimating ratio of population variance}}
+    
+    If $X_1, X_2,..., X_n \sim N(\mu_X,\sigma_X^2)$ and $Y_1,Y_2,...,Y_m \sim N(\mu_Y,\sigma_Y^2)$ are independent samples and $c = F_{\alpha/2}(m-1, n-1)$, $d = F_{1-\alpha/2}(m-1, n-1)$,
+    \[\left(c\dfrac{S_X^2}{S_Y^2},\  d\dfrac{S_X^2}{S_Y^2}\right)
+    \]
+    \begin{enumerate}
+        \item \textbf{Estimation ratio: Gender-based}
+    With $95\%$ confidence we can say that ratio of variance in male and female will lie within:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+        & WPM & Accuracy \\
+      \hline
+      Male-Female & [1.66,5.15] \ & \ [0.15,0.48] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{1.5mm}
+    
+        \item \textbf{Estimation ratio: Batch-based}
+    With $95\%$ confidence we can say that ratio of variance in all possible batches will lie within range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      UG-PHD & [1.47, 5.04] \ & \ [2.21, 7.60] \\ 
+      \hline
+      PHD-Masters & [0.38, 1.55] \ & \ [0.37, 1.50] \\
+      \hline
+      UG-Masters & [0.26, 0.87] \ & \ [0.18, 0.60] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    
+        \item \textbf{Estimation ratio: Branch-based}
+    With $95\%$ confidence we can say that ratio of variance in all possible batches will lie within range as follows:
+    \begin{center}
+    \begin{tabular}{ |c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Group 1-2 & [3.13,9.31] \ & \ [0.39,1.163] \\ 
+      \hline
+      Group 1-3 & [1.44,4.28] \ & \ [0.13,0.38] \\
+      \hline
+      Group 1-4 & [3.06,9.095] \ & \ [1.32,3.92] \\
+      \hline
+      Group 2-3 & [0.24,1.73] \ & \ [0.17,1.23]	\\
+      \hline
+      Group 2-4 & [0.52,3.68] \ & \ [1.79,12.69] \\
+      \hline
+      Group 3-4 & [0.24,3.63] \ & \ [0.05,0.75] \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{1.5mm}
+    \end{enumerate}
+\end{enumerate}
+
+
+\newpage
+\subsection*{\LARGE{Hypothesis Testing}}
+\label{sec:Hypothesis Testing}
+Hypothesis testing is a form of statistical inference that uses data from a sample to draw conclusions about a population parameter or a population probability distribution.
+
+\subsubsection*{\Large{Test for $\mu_1 - \mu_2$: Independent Samples, Unequal Variances}}
+The sample means ($\mu_1$) and ($\mu_2$) are independent and the variance is assumed to be unequal. So if we are performing \textbf{Left-tailed test:}
+
+\begin{center}
+        Null Hypothesis $(H_0)$: $\mu_1$ $\geq$ $\mu_2$\\
+        Alternative Hypothesis $(H_a)$: $\mu_1$ $<$ $\mu_2$ \\
+\end{center}
+The \textbf{Test Statistic (TS)} is:
+    \[t' = \frac{\bar{x_1} - \bar{x_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}\]
+Now,
+\[df = \frac{(n_1 - 1)(n_2 - 1)}{(1-c)^2(n_1 - 1) + c^2(n_2 - 1)} \quad \text{where} \quad c = \frac{\frac{s_1^2}{n_1}}{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+\]
+and df represents degree of freedom. \\
+
+Using p-value approach, we find the p-value for the test statistic (TS) by using t-distribution table and if
+\begin{center}
+    p-value $\leq$ $\alpha$ : Reject $H_0$ \\
+    p-value $ > \alpha$ : Fail to reject $H_0$
+\end{center}
+     
+
+\begin{enumerate}[label=\textbf{\arabic*})]
+    \item \textbf{Gender-based:}
+    \begin{itemize}
+        \item \textbf{Test for difference in mean of male and female} \\
+        Here, (WPM) \\
+        $H_0$: $\mu_1  \geq \mu_2$ and 
+        $H_a$: $\mu_1$ $<$ $\mu_2$ \\
+        
+        For female: $n_1$ = 39, $\bar{x}_1$ = 49.18, $s^2_1$ = 180.20 \\
+        For male: $n_2$ = 70, $\bar{x}_2$ = 61.96, $s^2_2$ = 539.23 \\
+        For above values,
+        
+    \[
+    t' = -3.640, \quad c = 0.375, \quad df = 106.82 \]
+    
+    \begin{center}
+        p-value = 0.000211				
+    \end{center}
+    Since, p-value = 0.000211 $<$ (0.05 = $\alpha$) \\
+    We reject Null Hypothesis ($H_0$) \\
+    \textbf{Conclusion: } 
+    The average typing speed (WPM) of male is greater is than average typing speed (WPM) of female. \\
+    
+    \end{itemize}
+    
+    \item \textbf{Batch-based:}
+    \begin{itemize}
+        \item \textbf{Test for difference in mean of UG($\mu_1$) and Masters($\mu_2$)}
+     \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.31 $>$ 0.05 \ & \ 0.63 $>$ 0.05 \\
+      \hline
+      Conclusion & Fail to reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        \item \textbf{Test for difference in mean of UG($\mu_1$) and PHD($\mu_2$)}
+    \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.28 $>$ 0.05 \ & \ 0.86 $>$ 0.05 \\
+      \hline
+      Conclusion & Fail to reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    
+        \item \textbf{Test for difference in mean of Masters($\mu_1$) and PHD($\mu_2$)}
+    \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.49 $>$ 0.05 \ & \ 0.79 $>$ 0.05 \\
+      \hline
+      Conclusion & Fail to reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        
+    \end{itemize}
+    
+    \item \textbf{Branch-based:}
+    \begin{itemize}
+        \item \textbf{Test for difference in mean of Group-1($\mu_1$) and Group-2($\mu_2$)}
+         \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 3.76 $>$ 0.05 \ & \ 0.84 $>$ 0.05 \\
+      \hline
+      Conclusion & Fail to reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    \newpage
+        \item \textbf{Test for difference in mean of Group-1($\mu_1$) and Group-3($\mu_2$)}
+         \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.007$>$ 0.05 \ & \ 0.11 $>$ 0.05 \\
+      \hline
+      Conclusion & reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        \item \textbf{Test for difference in mean of Group-1($\mu_1$) and Group-4($\mu_2$)}
+         \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.0022 $>$ 0.05 \ & \ 0.85 $>$ 0.05 \\
+      \hline
+      Conclusion & reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        \item \textbf{Test for difference in mean of Group-2($\mu_1$) and Group-3($\mu_2$)}
+         \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.007 $>$ 0.05 \ & \ 0.95 $>$ 0.05 \\
+      \hline
+      Conclusion & Fail to reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        \item \textbf{Test for difference in mean of Group-2($\mu_1$) and Group-4($\mu_2$)}
+         \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.0027 $>$ 0.05 \ & \ 0.6 $>$ 0.05 \\
+      \hline
+      Conclusion & reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+        \item \textbf{Test for difference in mean of Group-3($\mu_1$) and Group-4($\mu_2$)}
+         \begin{center}
+    \begin{tabular}{ |c|c|c|c|}
+      \hline
+       & WPM & Accuracy \\
+      \hline
+      Null Hypothesis $(H_0)$ & $\mu_1  \geq \mu_2$ \ & \ $\mu_1  \geq \mu_2$ \\ 
+      \hline
+      Alternative Hypothesis $(H_a)$ & $\mu_1$ $<$ $\mu_2$ \ & \ $\mu_1$ $<$ $\mu_2$ \\
+      \hline
+      p-value & 0.41 $>$ 0.05 \ & \ 0.95 $>$ 0.05 \\
+      \hline
+      Conclusion & Fail to reject $H_0$ \ & \ Fail to reject $H_0$ \\
+      \hline
+    \end{tabular}
+    \end{center}
+    \vspace{2mm}
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+\subsubsection*{\Large{Test for $\sigma_1^2$ and $\sigma_2^2$}}
+For comparing variances $\sigma_1^2,\  \sigma_2^2$, we are performing the \textbf{Two tailed test}:
+\begin{center}
+        Null Hypothesis $(H_0)$: $\sigma_1^2 = \sigma_2^2$\\
+        Alternative Hypothesis $(H_a)$: $\sigma_1^2 \neq \sigma_2^2$ 
+\end{center}
+The \textbf{Test Statistic (TS)} is:
+        \[F = \dfrac{s_1^2}{s_2^2}\]
+
+For a significance level $\alpha$, with $df_1 = n_1-1$ and $df_2 = n_2-1$, if
+\begin{center}
+    $F\leq F_{1-\alpha/2,df_1,df_2}$ or $F\geq F_{\alpha/2,df_1,df_2}$: Reject $H_0$\\
+    $F_{1-\alpha/2,df_1,df_2} < F < F_{\alpha/2,df_1,df_2}$ : Fail to reject $H_0$\\
+\end{center}
+
+\begin{enumerate}
+    \item \textbf{Gender-based:}
+    \begin{itemize}
+        \item \textbf{Test for comparing variance of male and female}\\
+        $(H_0)$: $\sigma_1^2 = \sigma_2^2$\\
+        $(H_a)$: $\sigma_1^2 \neq \sigma_2^2$\\
+        Here, (WPM)\\
+        For female: $n_1$ = 39, $\bar{x}_1$ = 49.18, $s^2_1$ = 180.20 \\
+        For male: $n_2$ = 70, $\bar{x}_2$ = 61.96, $s^2_2$ = 539.23 \\
+        For above values,
+        \[F = 0.34,\quad df_1 = 38,\quad df_2 = 69\]
+        For $\alpha = 0.05$,
+        \[F_{0.975, 38, 69} = 0.56, \quad F_{0.025, 38, 69} = 1.94\]
+        Since $F<F_{0.975, 38, 69} = 0.56$, we reject $H_0$.\\
+        \textbf{Conclusion:} The null hypothesis $H_0$ is rejected. The variances of typing speed of females are not equal.
+    \end{itemize}
+        \item \textbf{Batch-based:}
+    \begin{itemize}
+        \item \textbf{Test for comparing variance of UG and PHD}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.35 $\leq$ 0.55\ or\  0.35 $\geq$ 1.90   \ & \ 0.23 $\leq$ 0.55\ or\  0.23 $\geq$ 1.90 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \newpage
+        \item \textbf{Test for comparing variance of Masters and PHD}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.50 $\leq$ 0.77 $\leq$ 2.01   \ & \ 0.74 $\leq$ 0.50\ or\  0.74 $\geq$ 2.01 \\
+          \hline
+          Conclusion & Fail to reject $H_0$ \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \item \textbf{Test for comparing variance of Masters and UG}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  2.16 $\leq$ 0.55\ or\  2.16 $\geq$ 1.87   \ & \ 3.15 $\leq$ 0.55\ or\  3.15 $\geq$ 1.87 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+    \end{itemize}
+        \item \textbf{Branch-based:}
+    \begin{itemize}
+        \item \textbf{Test for comparing variance of Group-1 and Group-2}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.18 $\leq$ 0.5\ or\  0.18 $\geq$ 2.0   \ & \ 0.52 $\leq$ 1.48 $\leq$ 2.0 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ Fail to reject $H_0$\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \item \textbf{Test for comparing variance of Group-1 and Group-3}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.4 $\leq$ 0.52\ or\  0.4 $\geq$ 2.009   \ & \ 4.5 $\leq$ 0.5\ or\  4.5 $\geq$ 2.009 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \item \textbf{Test for comparing variance of Group-1 and Group-4}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.18 $\leq$ 0.52\ or\  0.18 $\geq$ 2.009   \ & \ 0.43 $\leq$ 0.5\ or\  0.43 $\geq$ 2.00 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \item \textbf{Test for comparing variance of Group-2 and Group-3}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.45 $\leq$ 0.47\ or\  0.45 $\geq$ 2.10   \ & \ 0.32 $\leq$ 0.47\ or\  0.32 $\geq$ 2.10 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \item \textbf{Test for comparing variance of Group-2 and Group-4}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.4 $\leq$ 0.90 $\leq$ 2.10   \ & \ 3.3 $\leq$ 0.4\ or\  3.33 $\geq$ 2.10 \\
+          \hline
+          Conclusion & Fail to reject $H_0$ \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+        \item \textbf{Test for comparing variance of Group-3 and Group-4}
+        \begin{center}
+        \begin{tabular}{ |c|c|c|c|}
+          \hline
+           & WPM & Accuracy \\
+          \hline
+          $H_0$ & $\sigma_1^2  = \sigma_2^2$ \ & \ $\sigma_1^2  = \sigma_2^2$ \\ 
+          \hline
+          $H_a$ & $\sigma_1^2  \neq \sigma_2^2$ \ & \ $\sigma_1^2  \neq \sigma_2^2$ \\
+          \hline
+          F-value &  0.47 $\leq$ 0.47\ or\  0.47 $\geq$ 2.10   \ & \ 0.09 $\leq$ 0.47\ or\  0.09 $\geq$ 2.10 \\
+          \hline
+          Conclusion & $H_0$ is rejected \ & \ $H_0$ is rejected\\
+          \hline
+        \end{tabular}
+        \end{center}
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+
+\section*{\Huge{Conclusion}}
+We draw the following conclusions:
+\begin{itemize}
+    \item Since we performed an observational study, we can only ascertain correlation between the dependent and independent variables.
+    \item In terms of words per minute, males have been found to perform better than their female counterparts. The spread\footnote{By spread, it means the comparison of variances of the groups} of data is not similar in both cases.
+    \item In terms of wpm, Group 1(CSE, MA, AI, ES) performed the best .Group 2 (CH, CE, MSME, BME,BTE) had the least typing speed. No concrete conclusion can be drawn about the order between Group 3(Physics, ME, EE, EP) and Group 4(LA, Design, Others).
+    Spread of all groups is different but group 1 and group 2 can not be conclusively compared.
+    \item No clear correlation was found between the typing speed of an individual and the course they are enrolled in.UG's have different spread than Masters and PhD's.  Masters and PhD's can not be conclusively compared.
+    \item No such conclusion can be drawn about accuracy in any of the above stated cases.
+\end{itemize}
+\href{https://docs.google.com/spreadsheets/d/1xesjf1nIhxYrOKqsC9ru4PHhpJlf1PWCTVzafvY1Ha4/edit?usp=sharing}{Google Sheet Link with all the data related to the study}
+\newpage
+
+\section*{\Huge{Contributions}}
+\subsection*{Amulya Tallamraju: }
+\begin{itemize}
+    \item Data Collection
+    \item Sampling Distribution for overall population
+    \item Hypothesis Testing for mean, variance based on Gender, Branch and Batch
+    \item Helped out with making the presentation
+    \item Made the Google Form for collecting data
+\end{itemize}
+\subsection*{Vaibhav Chhabra: }
+\begin{itemize}
+    \item Data Collection
+    \item Data Analysis based on batch(graduation-level)
+    \item Made excel sheet for the batch data
+    \item Made the Report on Latex
+\end{itemize}
+\subsection*{Anita Dash}
+\begin{itemize}
+    \item Data Collection
+    \item Sampling Distribution
+    \item Data Analysis Based on Gender
+    \item Plotting the necessary Graphs (side by side box plots, bar plots etc.)
+    \item Made the Google Sheet with all the Data related to the study
+    \item Made the presentation on Latex Beamer
+\end{itemize}
+\subsection*{Anjali: }
+\begin{itemize}
+    \item Data Collection
+    \item Data Analysis based on branch
+    \item Made the Google Sheet with all the Data related to the study
+\end{itemize}
+\subsection*{Ruthwika Boyapally: }
+\begin{itemize}
+    \item Floated Google form via e-mail
+    \item Data Collection
+    \item Data Analysis based on Branch 
+    \item Made excel sheet based on branch data
+    \item Made the presentation on Latex Beamer
+\end{itemize}
+
+
+\subsection*{Kunal Nema: }
+\begin{itemize}
+    \item Made and floated the Google form for survey
+    \item Data Collection
+    \item Summarizing and Analysis of Data based on Batch
+    \item Made excel sheet for data on Batch
+    \item Made Report on Latex
+\end{itemize}
+\subsection*{Sparsh Gupta: }
+\begin{itemize}
+    
+    \item Data Collection
+    \item Data Analysis based on Batch
+    \item Helped in presentation making
+    \item Made Report on LaTex.
+    
+\end{itemize}
+\subsection*{Tapishi Kaur: }
+\begin{itemize}
+    
+    \item Data Collection
+    \item Sampling Distribution
+    \item Data Analysis on basis of Branches
+    \item Made Report on Latex
+\end{itemize}
+\end{document}
