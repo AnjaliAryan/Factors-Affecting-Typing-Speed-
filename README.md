@@ -1,1 +1,0 @@
-# Factors-Affecting-Typing-Speed-
